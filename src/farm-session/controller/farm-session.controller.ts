@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { FarmSessionService } from '../service/farm-session.service';
 import { Observable } from 'rxjs';
 import { FarmSession } from '../entity/farm-session.entity';
-import { FarmSessionInterface } from '../interface/farm-session.interface';
+import { FarmSessionDto } from '../dto/farm-session.dto';
 
 @Controller('farm-session')
 export class FarmSessionController {
@@ -15,8 +15,8 @@ export class FarmSessionController {
   @Post()
   createOne(
     @Body()
-    farmSession: FarmSessionInterface,
-  ): Observable<FarmSessionInterface> {
+    farmSession: FarmSessionDto,
+  ): Observable<FarmSessionDto> {
     return this.farmSessionService.createOne(farmSession);
   }
 }

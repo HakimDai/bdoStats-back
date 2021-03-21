@@ -1,6 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FarmSessionController } from './farm-session.controller';
 import { FarmSessionService } from '../service/farm-session.service';
+import { FarmSession } from '../entity/farm-session.entity';
+import { of } from 'rxjs';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 describe('FarmSessionController', () => {
   let controller: FarmSessionController;
@@ -9,7 +13,10 @@ describe('FarmSessionController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [FarmSessionController],
-      providers: [FarmSessionService],
+      providers: [
+        FarmSessionService,
+        { provide: getRepositoryToken(FarmSession), useClass: Repository },
+      ],
     }).compile();
 
     controller = module.get<FarmSessionController>(FarmSessionController);
@@ -22,10 +29,23 @@ describe('FarmSessionController', () => {
 
   describe('findAll', () => {
     it('should return an array with test', async () => {
-      const result = ['test'];
-      jest.spyOn(service, 'findAll').mockImplementation(() => result);
+      const result: FarmSession[] = [
+        {
+          id: 1,
+          zone: {
+            id: 1,
+            name: 'sulfur',
+            region: { id: 1, name: 'valencia' },
+            lootTable: { id: 1, loots: [] },
+          },
+          duration: 60,
+        },
+      ];
+      jest.spyOn(service, 'findAll').mockImplementation(() => of(result));
 
-      expect(await controller.findAll()).toBe(result);
+      await controller.findAll().subscribe((value) => {
+        expect(value).toBe(result);
+      });
     });
   });
 });
