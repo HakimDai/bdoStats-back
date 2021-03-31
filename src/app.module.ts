@@ -7,6 +7,7 @@ import { FarmSessionModule } from './farm-session/farm-session.module';
 import { LootModule } from './loot/loot.module';
 import { ZoneModule } from './zone/zone.module';
 import { RegionModule } from './region/region.module';
+import { FarmSessionHasLootModule } from './farmSession-has-loot/farmSession-has-loot.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { RegionModule } from './region/region.module';
     LootModule,
     ZoneModule,
     RegionModule,
+    FarmSessionHasLootModule,
   ],
   controllers: [AppController],
   providers: [AppService],

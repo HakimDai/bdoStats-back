@@ -1,5 +1,12 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { FarmSession } from '../farm-session/entity/farm-session.entity';
+import { FarmSessionHasLoot } from '../farmSession-has-loot/farmSessionHasLoot.entity';
 
 @Entity()
 export class Loot {
@@ -9,6 +16,9 @@ export class Loot {
   @Column({ type: 'varchar', width: 80 })
   name: string;
 
-  @ManyToMany(() => FarmSession, (farmSession) => farmSession.loots)
-  farmSessions: FarmSession;
+  @OneToMany(
+    () => FarmSessionHasLoot,
+    (farmSessionHasLoot) => farmSessionHasLoot.loot,
+  )
+  farmSessionHasLoots: FarmSessionHasLoot[];
 }

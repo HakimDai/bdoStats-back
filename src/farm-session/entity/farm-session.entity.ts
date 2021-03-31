@@ -1,6 +1,15 @@
-import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import {Zone} from '../../zone/entity/zone.entity';
-import {Loot} from "../../loot/loot.entity";
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Zone } from '../../zone/entity/zone.entity';
+import { Loot } from '../../loot/loot.entity';
+import { FarmSessionHasLoot } from '../../farmSession-has-loot/farmSessionHasLoot.entity';
 
 @Entity()
 export class FarmSession {
@@ -13,7 +22,9 @@ export class FarmSession {
   @ManyToOne(() => Zone, { cascade: true })
   zone: Zone;
 
-  @ManyToMany(() => Loot, (loot) => loot.farmSessions)
-  @JoinTable()
-  loots: Loot;
+  @OneToMany(
+    () => FarmSessionHasLoot,
+    (farmSessionHasLoot) => farmSessionHasLoot.farmSession,
+  )
+  farmSessionHasLoots: FarmSessionHasLoot[];
 }
