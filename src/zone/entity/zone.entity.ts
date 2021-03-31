@@ -1,13 +1,5 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Region } from '../../region/region.entity';
-import { LootTable } from '../../loot-table/loot-table.entity';
 
 @Entity()
 export class Zone {
@@ -19,8 +11,4 @@ export class Zone {
 
   @ManyToOne(() => Region)
   region: Region;
-
-  @OneToOne(() => LootTable)
-  @JoinColumn()
-  lootTable: LootTable;
 }

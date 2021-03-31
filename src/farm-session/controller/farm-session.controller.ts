@@ -21,7 +21,7 @@ export class FarmSessionController {
   createOne(
     @Body()
     farmSession: FarmSessionDto,
-  ): Observable<InsertResult> {
+  ): Observable<FarmSession> {
     return this.farmSessionService.createOne(farmSession);
   }
 

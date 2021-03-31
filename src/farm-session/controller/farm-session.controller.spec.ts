@@ -19,18 +19,17 @@ describe('FarmSessionController', () => {
       lootTable: { id: 1, loots: [] },
     },
   };
-  const result: FarmSession[] = [
-    {
+  const farmSession = {
+    id: 1,
+    zone: {
       id: 1,
-      zone: {
-        id: 1,
-        name: 'sulfur',
-        region: { id: 1, name: 'valencia' },
-        lootTable: { id: 1, loots: [] },
-      },
-      duration: 60,
+      name: 'sulfur',
+      region: { id: 1, name: 'valencia' },
+      lootTable: { id: 1, loots: [] },
     },
-  ];
+    duration: 60,
+  };
+  const result: FarmSession[] = [farmSession];
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -59,16 +58,18 @@ describe('FarmSessionController', () => {
 
   describe('createOne', () => {
     it('should create one entry', async () => {
-      jest.spyOn(service, 'createOne').mockImplementation(() => of(entry));
+      jest
+        .spyOn(service, 'createOne')
+        .mockImplementation(() => of(farmSession));
       controller.createOne(entry).subscribe((value) => {
         expect(value).toBe(entry);
       });
     });
   });
 
-  describe('update', () => {
-    it('should update one entry', async () => {
-      jest.spyOn(service, 'update').mockImplementation(() => of(entry));
-    })
-  })
+  // describe('update', () => {
+  //   it('should update one entry', async () => {
+  //     jest.spyOn(service, 'update').mockImplementation(() => of(entry));
+  //   })
+  // })
 });

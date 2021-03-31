@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import {InsertResult, Repository} from 'typeorm';
-import { FarmSession } from '../entity/farm-session.entity';
-import { from, Observable } from 'rxjs';
+import {Injectable} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {FarmSession} from '../entity/farm-session.entity';
+import {from, Observable} from 'rxjs';
 import { FarmSessionDto } from '../dto/farm-session.dto';
 
 @Injectable()
@@ -12,8 +12,12 @@ export class FarmSessionService {
     private farmSessionRepository: Repository<FarmSession>,
   ) {}
 
-  createOne(farmSession: FarmSessionDto): Observable<InsertResult> {
-    return from(this.farmSessionRepository.insert(farmSession));
+  createOne(farmSession: FarmSessionDto): Observable<FarmSession> {
+    const session = new FarmSession();
+    session.duration = farmSession.duration;
+    session.zone = farmSession.zone;
+    const sessionRepository = this.farmSessionRepository.create(session);
+    return from(this.farmSessionRepository.save(sessionRepository));
   }
 
   findAll(): Observable<FarmSession[]> {

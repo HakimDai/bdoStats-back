@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { LootTable } from '../loot-table/loot-table.entity';
+import { FarmSession } from '../farm-session/entity/farm-session.entity';
 
 @Entity()
 export class Loot {
@@ -9,6 +9,6 @@ export class Loot {
   @Column({ type: 'varchar', width: 80 })
   name: string;
 
-  @ManyToMany(() => LootTable, (lootTable) => lootTable.loots)
-  lootTables: LootTable;
+  @ManyToMany(() => FarmSession, (farmSession) => farmSession.loots)
+  farmSessions: FarmSession;
 }
