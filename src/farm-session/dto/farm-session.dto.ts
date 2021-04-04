@@ -1,7 +1,5 @@
-import { Zone } from '../../zone/entity/zone.entity';
-
-export interface FarmSessionDto {
-  id?: number;
-  zone: Zone;
+export class FarmSessionDto {
   duration: number;
+  zoneId: number;
+  loots: { id: number; quantity: number }[];
 }

@@ -1,6 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { FarmSessionService } from './farm-session.service';
-import { of } from 'rxjs';
 import { FarmSession } from '../entity/farm-session.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';

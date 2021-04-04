@@ -43,19 +43,6 @@ describe('FarmSessionController', () => {
     service = module.get<FarmSessionService>(FarmSessionService);
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-
-  describe('findAll', () => {
-    it('should return an array with test', async () => {
-      jest.spyOn(service, 'findAll').mockImplementation(() => of(result));
-      controller.findAll().subscribe((value) => {
-        expect(value).toBe(result);
-      });
-    });
-  });
-
   describe('createOne', () => {
     it('should create one entry', async () => {
       jest
@@ -66,10 +53,4 @@ describe('FarmSessionController', () => {
       });
     });
   });
-
-  // describe('update', () => {
-  //   it('should update one entry', async () => {
-  //     jest.spyOn(service, 'update').mockImplementation(() => of(entry));
-  //   })
-  // })
 });

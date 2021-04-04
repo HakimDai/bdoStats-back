@@ -7,7 +7,7 @@ import { FarmSessionModule } from './farm-session/farm-session.module';
 import { LootModule } from './loot/loot.module';
 import { ZoneModule } from './zone/zone.module';
 import { RegionModule } from './region/region.module';
-import { FarmSessionHasLootModule } from './farmSession-has-loot/farmSession-has-loot.module';
+import { FarmSessionHasLootModule } from './farm-session-has-loot/farm-session-has-loot.module';
 
 @Module({
   imports: [
