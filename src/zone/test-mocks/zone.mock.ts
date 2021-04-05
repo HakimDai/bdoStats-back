@@ -3,7 +3,7 @@ import { Zone } from '../entity/zone.entity';
 
 export const zoneToCreate: ZoneDto = {
   name: 'sulfur',
-  region: { id: 1, name: 'Valencia' },
+  regionId: 1,
 };
 
 export const zoneCreated: Zone = {

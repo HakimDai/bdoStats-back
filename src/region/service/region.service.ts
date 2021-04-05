@@ -15,4 +15,8 @@ export class RegionService {
     const regionCreated = this.regionRepository.create(region);
     return from(this.regionRepository.save(regionCreated));
   }
+
+  findOne(id: number): Observable<Region> {
+    return from(this.regionRepository.findOne(id));
+  }
 }

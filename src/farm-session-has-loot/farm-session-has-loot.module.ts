@@ -8,5 +8,6 @@ import { FarmSessionHasLootService } from './service/farm-session-has-loot.servi
   imports: [TypeOrmModule.forFeature([FarmSessionHasLoot])],
   controllers: [FarmSessionHasLootController],
   providers: [FarmSessionHasLootService],
+  exports: [FarmSessionHasLootService],
 })
 export class FarmSessionHasLootModule {}

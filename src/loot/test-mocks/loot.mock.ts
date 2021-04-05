@@ -4,7 +4,7 @@ import { Loot } from '../entity/loot.entity';
 export const lootToCreate: LootDto = {
   name: 'token',
   price: 3000,
-  zones: [{ zoneId: 1 }],
+  zones: [{ id: 1 }],
 };
 
 export const lootCreated: Loot = {
