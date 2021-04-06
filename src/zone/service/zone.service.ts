@@ -30,4 +30,14 @@ export class ZoneService {
   findOne(id): Observable<Zone> {
     return from(this.zoneRepository.findOne(id));
   }
+
+  findZone(id: number) {
+    return from(
+      this.zoneRepository
+        .createQueryBuilder('zone')
+        .leftJoinAndSelect('zone.region', 'region')
+        .where('zone.id = :id', { id: id })
+        .getOne(),
+    );
+  }
 }

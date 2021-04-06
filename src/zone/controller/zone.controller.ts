@@ -15,6 +15,6 @@ export class ZoneController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.zoneService.findOne(+id);
+    return this.zoneService.findZone(+id);
   }
 }
