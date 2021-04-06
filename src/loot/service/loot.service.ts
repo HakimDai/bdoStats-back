@@ -3,10 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Loot } from '../entity/loot.entity';
 import { Repository } from 'typeorm';
 import { LootDto } from '../dto/loot.dto';
-import { concat, forkJoin, from, Observable, of } from 'rxjs';
+import { from } from 'rxjs';
 import { ZoneService } from '../../zone/service/zone.service';
-import { Zone } from '../../zone/entity/zone.entity';
-import { finalize, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class LootService {
@@ -15,26 +13,19 @@ export class LootService {
     private zoneService: ZoneService,
   ) {}
 
-  createOne(loot: LootDto): Observable<Loot> {
+  async createOne(loot: LootDto): Promise<Loot> {
     const lootToSave = new Loot();
-    let savedLoot = new Loot();
     lootToSave.name = loot.name;
     lootToSave.price = loot.price;
-    const findZones: Observable<Zone>[] = [];
-    loot.zones.forEach((zone) => {
-      findZones.push(this.zoneService.findZone(zone.id));
-    });
-    forkJoin(findZones).pipe(
-      tap((results: Zone[]) => {
-        lootToSave.zones = results;
-      }),
-      tap(() => {
-        from(this.lootRepository.save(lootToSave)).subscribe(
-          (result) => (savedLoot = result),
-        );
-      }),
-    );
-    return of(savedLoot);
+    lootToSave.zones = [];
+    for (const lootZone of loot.zones) {
+      let zone;
+      await this.zoneService.findZone(lootZone.id).then((result) => {
+        zone = result;
+      });
+      lootToSave.zones.push(zone);
+    }
+    return this.lootRepository.save(lootToSave);
   }
 
   findOne(id: number) {

@@ -32,12 +32,10 @@ export class ZoneService {
   }
 
   findZone(id: number) {
-    return from(
-      this.zoneRepository
-        .createQueryBuilder('zone')
-        .leftJoinAndSelect('zone.region', 'region')
-        .where('zone.id = :id', { id: id })
-        .getOne(),
-    );
+    return this.zoneRepository
+      .createQueryBuilder('zone')
+      .leftJoinAndSelect('zone.region', 'region')
+      .where('zone.id = :id', { id: id })
+      .getOne();
   }
 }

@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { ZoneService } from '../service/zone.service';
 import { Zone } from '../entity/zone.entity';
 import { ZoneDto } from '../dto/zone.dto';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 @Controller('zone')
 export class ZoneController {
@@ -15,6 +15,6 @@ export class ZoneController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.zoneService.findZone(+id);
+    return from(this.zoneService.findZone(+id));
   }
 }
