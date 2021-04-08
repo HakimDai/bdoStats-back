@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Loot } from '../entity/loot.entity';
 import { Repository } from 'typeorm';
 import { LootDto } from '../dto/loot.dto';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { ZoneService } from '../../zone/service/zone.service';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class LootService {
     return this.lootRepository.save(lootToSave);
   }
 
-  findOne(id: number) {
+  findOne(id: number): Observable<Loot> {
     return from(this.lootRepository.findOne(id));
   }
 }
