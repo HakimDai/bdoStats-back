@@ -12,7 +12,7 @@ export class FarmSessionController {
   createOne(
     @Body()
     farmSession: FarmSessionDto,
-  ): Observable<FarmSession> {
+  ) {
     return this.farmSessionService.createOne(farmSession);
   }
 }
