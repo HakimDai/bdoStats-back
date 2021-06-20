@@ -1,0 +1,56 @@
+import { Test, TestingModule } from '@nestjs/testing';
+import { FarmSessionController } from './farm-session.controller';
+import { FarmSessionService } from '../service/farm-session.service';
+import { FarmSession } from '../entity/farm-session.entity';
+import { of } from 'rxjs';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { FarmSessionDto } from '../dto/farm-session.dto';
+
+describe('FarmSessionController', () => {
+  let controller: FarmSessionController;
+  let service: FarmSessionService;
+  const entry: FarmSessionDto = {
+    duration: 60,
+    zone: {
+      id: 1,
+      name: 'sulfur',
+      region: { id: 1, name: 'valencia' },
+      lootTable: { id: 1, loots: [] },
+    },
+  };
+  const farmSession = {
+    id: 1,
+    zone: {
+      id: 1,
+      name: 'sulfur',
+      region: { id: 1, name: 'valencia' },
+      lootTable: { id: 1, loots: [] },
+    },
+    duration: 60,
+  };
+  const result: FarmSession[] = [farmSession];
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      controllers: [FarmSessionController],
+      providers: [
+        FarmSessionService,
+        { provide: getRepositoryToken(FarmSession), useClass: Repository },
+      ],
+    }).compile();
+    controller = module.get<FarmSessionController>(FarmSessionController);
+    service = module.get<FarmSessionService>(FarmSessionService);
+  });
+
+  describe('createOne', () => {
+    it('should create one entry', async () => {
+      jest
+        .spyOn(service, 'createOne')
+        .mockImplementation(() => of(farmSession));
+      controller.createOne(entry).subscribe((value) => {
+        expect(value).toBe(entry);
+      });
+    });
+  });
+});
