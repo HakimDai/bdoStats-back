@@ -4,7 +4,7 @@ import { LootDto } from '../dto/loot.dto';
 import { from, Observable } from 'rxjs';
 import { Loot } from '../entity/loot.entity';
 
-@Controller('loot')
+@Controller('loots')
 export class LootController {
   constructor(private lootService: LootService) {}
 

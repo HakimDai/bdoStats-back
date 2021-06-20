@@ -3,9 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Zone } from '../entity/zone.entity';
 import { Repository } from 'typeorm';
 import { ZoneDto } from '../dto/zone.dto';
-import { from, Observable, of } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { RegionService } from '../../region/service/region.service';
-import { finalize, switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Injectable()
 export class ZoneService {
@@ -17,7 +17,7 @@ export class ZoneService {
   createOne(zone: ZoneDto): Observable<Zone> {
     const zoneToSave = new Zone();
     zoneToSave.name = zone.name;
-    return this.regionService.findOne(zone.regionId).pipe(
+    return this.regionService.findOneRegion(zone.regionId).pipe(
       tap((regionFound) => {
         zoneToSave.region = regionFound;
       }),

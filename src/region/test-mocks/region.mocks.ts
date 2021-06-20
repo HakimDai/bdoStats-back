@@ -5,4 +5,4 @@ export const regionMock: RegionDto = {
   name: 'Valencia',
 };
 
-export const regionCreated: Region = { id: 1, name: 'Valencia' };
+export const regionCreatedMock: Region = { id: 1, name: 'Valencia' };

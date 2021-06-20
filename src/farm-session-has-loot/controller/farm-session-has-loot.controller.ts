@@ -4,7 +4,7 @@ import { FarmSessionHasLootDto } from '../dto/farm-session-has-loot.dto';
 import { Observable } from 'rxjs';
 import { FarmSessionHasLoot } from '../entity/farm-session-has-loot.entity';
 
-@Controller('farm-session-has-loot')
+@Controller('farm-session-has-loots')
 export class FarmSessionHasLootController {
   constructor(private farmSessionHasLootService: FarmSessionHasLootService) {}
 

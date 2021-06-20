@@ -6,7 +6,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { Region } from '../entity/region.entity';
 import { Repository } from 'typeorm';
 import { of } from 'rxjs';
-import { regionCreated, regionMock } from '../test-mocks/region.mocks';
+import { regionCreatedMock, regionMock } from '../test-mocks/region.mocks';
 
 describe('RegionController', () => {
   let controller: RegionController;
@@ -30,9 +30,9 @@ describe('RegionController', () => {
     it('should return the same name of the entry', async () => {
       jest
         .spyOn(service, 'createOne')
-        .mockImplementation(() => of(regionCreated));
+        .mockImplementation(() => of(regionCreatedMock));
       controller.createOne(region).subscribe((value) => {
-        expect(value.name).toEqual(regionCreated.name);
+        expect(value.name).toEqual(regionCreatedMock.name);
       });
     });
   });

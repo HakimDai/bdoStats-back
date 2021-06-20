@@ -4,7 +4,7 @@ import { Zone } from '../entity/zone.entity';
 import { ZoneDto } from '../dto/zone.dto';
 import { from, Observable } from 'rxjs';
 
-@Controller('zone')
+@Controller('zones')
 export class ZoneController {
   constructor(private zoneService: ZoneService) {}
 

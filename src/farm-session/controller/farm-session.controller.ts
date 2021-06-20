@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { FarmSession } from '../entity/farm-session.entity';
 import { FarmSessionDto } from '../dto/farm-session.dto';
 
-@Controller('farm-session')
+@Controller('farm-sessions')
 export class FarmSessionController {
   constructor(private farmSessionService: FarmSessionService) {}
 

@@ -16,7 +16,11 @@ export class RegionService {
     return from(this.regionRepository.save(regionCreated));
   }
 
-  findOne(id: number): Observable<Region> {
+  findOneRegion(id: number): Observable<Region> {
     return from(this.regionRepository.findOne(id));
+  }
+
+  findAll(): Observable<Region[]> {
+    return from(this.regionRepository.find({ select: ['id', 'name'] }));
   }
 }
